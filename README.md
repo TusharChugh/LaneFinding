@@ -1,6 +1,6 @@
 
 
-## Advanced Lane Finding Project**
+## Advanced Lane Finding Project
 
 The goals / steps of this project are the following:
 
@@ -78,17 +78,17 @@ I verified that my perspective transform was working as expected by drawing the 
 
 #### 4. Detect lane pixels and fit to find the lane boundary.
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+Then I used 2D convolutions with a sliding windows from left to right of the image to detected the line. Height of convolution is 1/9 of the image height (too small leads to give way to more noise, too large leads to approximation error of the curve). So the loop runs 9 times to get all the edge points in the left and right part of the image. The code for this section is in cell 49 `find_window_centroids` The points are the passed to cv2.polyfit function to fit my lane lines with a 2nd order polynomial kinda like this:
 
 ![alt text][image5]
 
-#### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
+#### 5. Determine the curvature of the lane and vehicle position with respect to center.
 
-I did this in lines # through # in my code in `my_other_file.py`
+I modified the Line class to calculate and store the radius as well as vehicle position. The code is in cell 52 in `line_from_pixels` function. There are a bunch of sanity check functions in the the Line class to check if the lines detected are parallel, similar to lines detected in previous frames and are of justifible width. 
 
-#### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
+#### 6. Warp the detected lane boundaries back onto the original image.
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+I implemented this step in 53rd cellin the function `fill_pixels_road()`.  Here is an example of my result on a test image:
 
 ![alt text][image6]
 
@@ -96,7 +96,7 @@ I implemented this step in lines # through # in my code in `yet_another_file.py`
 
 ### Pipeline (video)
 
-#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
+#### 1. Here is the link to the video. All 3 video's can be found in result/output_videos directory.
 
 Here's a [link to my video result][video1]
 
@@ -104,6 +104,5 @@ Here's a [link to my video result][video1]
 
 ### Discussion
 
-#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
-
+#### 1. Techniques used to make pipeline more robust
 Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
