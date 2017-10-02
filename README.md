@@ -1,6 +1,6 @@
 
 
-**Advanced Lane Finding Project**
+## Advanced Lane Finding Project**
 
 The goals / steps of this project are the following:
 
@@ -18,10 +18,10 @@ The goals / steps of this project are the following:
 [image1]: ./results/camera_cal/image_udist.png "Undistorted"
 [image2]: ./results/output_images/road_transformed.png "Road Transformed"
 [image3]: ./results/output_images/binary_image.png  "Binary Example"
-[image4]: ./results/output_images/warped_straight_lines.jpg "Warp Example"
-[image5]: ./results/output_images/color_fit_lines.jpg "Fit Visual"
-[image6]: ./results/output_images/example_output.jpg "Output"
-[video1]: ./results/output_images/project_video.mp4 "Video"
+[image4]: ./results/output_images/warped_straight_lines.png "Warp Example"
+[image5]: ./results/output_images/color_fit_lines.png "Fit Visual"
+[image6]: ./results/output_images/example_output.png "Output"
+[video1]: ./results/output_videos/project_video.mp4 "Video"
 
 ## Steps followed
 
