@@ -23,6 +23,8 @@ The goals / steps of this project are the following:
 [image6]: ./results/output_images/example_output.png "Output"
 [image7]: ./results/output_images/marker_warp.png "Output"
 [video1]: ./results/output_videos/project_video.mp4 "Video"
+[video2]: ./results/output_videos/challenge_video.mp4 "Video"
+[video3]: ./results/output_videos/harder_challenge_video.mp4 "Video"
 
 ## Steps followed
 
@@ -78,7 +80,7 @@ I verified that my perspective transform was working as expected by drawing the 
 
 #### 4. Detect lane pixels and fit to find the lane boundary.
 
-Then I used 2D convolutions with a sliding windows from left to right of the image to detected the line. Height of convolution is 1/9 of the image height (too small leads to give way to more noise, too large leads to approximation error of the curve). So the loop runs 9 times to get all the edge points in the left and right part of the image. The code for this section is in cell 49 `find_window_centroids` The points are the passed to cv2.polyfit function to fit my lane lines with a 2nd order polynomial kinda like this:
+Then I used 2D convolutions with a sliding windows from left to right of the image to detected the line. Height of convolution is 1/9 of the image height (too small leads to give way to more noise, too large leads to approximation error of the curve). So the loop runs 9 times to get all the edge points in the left and right part of the image. The code for this section is in cell 49 `find_window_centroids()` The points are the passed to cv2.polyfit function to fit my lane lines with a 2nd order polynomial kinda like this:
 
 ![alt text][image5]
 
@@ -99,10 +101,17 @@ I implemented this step in 53rd cellin the function `fill_pixels_road()`.  Here 
 #### 1. Here is the link to the video. All 3 video's can be found in result/output_videos directory.
 
 Here's a [link to my video result][video1]
+Here's a [link to video 2 result][video2]
+Here's a [link to video 3 result][video3]
 
 ---
 
 ### Discussion
 
 #### 1. Techniques used to make pipeline more robust
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+Following checks are done to make the detections of lane more robust:
+1. Curvature of lines in new frame is similar to previous frame. 
+2. Lane width makes sense (is less than max width, more than min width, and similar to width in the previous frame)
+3. Lanes are almost parallel (Check the standard deviation of the difference of pixel between two lines)
+4. Comparison of the lines bottom pixels with previous frames (bottom location of the line in different frame should be of similar values)
+5. Smoothing: Using past 10 frames to make the lines more smooth
