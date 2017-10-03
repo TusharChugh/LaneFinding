@@ -115,3 +115,11 @@ Following checks are done to make the detections of lane more robust:
 3. Lanes are almost parallel (Check the standard deviation of the difference of pixel between two lines)
 4. Comparison of the lines bottom pixels with previous frames (bottom location of the line in different frame should be of similar values)
 5. Smoothing: Using past 10 frames to make the lines more smooth
+
+#### 2. Making it more robust
+1. It fails when we have a shadow or dividor very close to the road lines(Like in challenge_video.mp4). It can be solved by two ways. One - Only search in the vicinity of the locations in the previous frames. I tried this. It makes results better but still it is not very robust. Come up with a smarted  solution to select best 2 lines from all detected lines. 
+2. When the lines curves a lot (like in harder_challenge_video.mp4). Using less than 10 images for smoothing and than relaxing radius constaints a bit. But then results on the other 2 videos are impacted.
+3. Giving more weights to the recent images when calculating best_fit rather than just taking an average. 
+4. Kalman filter can also be used for tracking rather than taking the average of the past lines. 
+5. There us another issue when we don't get good detection contiously for few frames. This one is harder to solve and I am still thinking about a solution for that. 
+
